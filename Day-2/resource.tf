@@ -46,6 +46,6 @@ resource "aws_instance" "my_instance" {
     key_name = var.key_name
     vpc_security_group_ids = [aws_security_group.sg.id]
     user_data = file("/root/terraform-b30/Day-2/user-data.sh")
-    tags = var.tags 
+    tags = var.tags
 }
 

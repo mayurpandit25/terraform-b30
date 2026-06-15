@@ -11,10 +11,6 @@ variable "key_name" {
     default = "web"
 }
 
-variable "tags" {
-    default = "my-instance"
-}
-
 variable "sg_name" {
     default = "my-security-group-for-default-vpc"
 }
@@ -26,3 +22,10 @@ variable "ingress_http" {
 variable "ingress_ssh" {
     default = 22
 }
+
+variable "tags" {
+    default = {
+        Name = "my-instance"
+    }
+}
+
