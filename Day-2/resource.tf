@@ -10,20 +10,20 @@ data "aws_vpc" "default" {
 # }
 
 resource "aws_security_group" "sg" {
-    name        = "my-security-group-for-default-vpc"
-    description = "my-security-group-for-default-vpc"
+    name        = var.sg_name
+    description = var.sg_name
     vpc_id      = data.aws_vpc.default.id 
 
     ingress {
-        from_port = 22 
-        to_port   = 22
+        from_port = var.ingress_ssh
+        to_port   = var.ingress_ssh
         protocol  = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
 
     ingress {
-        from_port = 80
-        to_port   = 80
+        from_port = var.ingress_http
+        to_port   = var.ingress_http
         protocol  = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
@@ -36,17 +36,18 @@ resource "aws_security_group" "sg" {
     }
 
     tags = {
-        Name = "my-security-group-for-default-vpc"
+        Name = var.sg_name
     }
 }
 
 resource "aws_instance" "my_instance" {
-    ami = "ami-0741dc526e1106ae5"
-    instance_type = "t3.micro"
-    key_name = "web"
+    ami = var.ami
+    instance_type = var.instance_type
+    key_name = var.key_name
     vpc_security_group_ids = [aws_security_group.sg.id]
     user_data = file("/root/terraform-b30/Day-2/user-data.sh")
     tags = {
-        Name = "my-instance"
+        Name = var.tags 
     }
 }
+
