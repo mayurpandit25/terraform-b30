@@ -2,12 +2,12 @@ data "aws_vpc" "default" {
     default = true 
 }
 
-data "aws_subnet" "default" {
-    filter {
-        name   = "vpc-id"
-        values = [data.aws_vpc.default.id]
-    }
-}
+# data "aws_subnet" "default" {
+#     filter {
+#         name   = "vpc-id"
+#         values = [data.aws_vpc.default.id]
+#     }
+# }
 
 resource "aws_security_group" "sg" {
     name        = "my-security-group-for-default-vpc"
