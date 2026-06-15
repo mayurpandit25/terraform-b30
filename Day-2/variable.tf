@@ -12,10 +12,7 @@ variable "key_name" {
 }
 
 variable "tags" {
-    type = map(string)
-    default = {
-        Name = "my-instance"
-    }
+    default = "my-instance"
 }
 
 variable "sg_name" {
