@@ -39,3 +39,14 @@ resource "aws_security_group" "sg" {
         Name = "my-security-group-for-default-vpc"
     }
 }
+
+resource "aws_instance" "my_instance" {
+    ami = "ami-0741dc526e1106ae5"
+    instance_type = "t3.micro"
+    key_name = "web"
+    vpc_security_group_ids = [aws_security_group.sg.id]
+    user_data = file("/root/terraform-b30/Day-2/user-data.sh")
+    tags = {
+        Name = "my-instance"
+    }
+}
