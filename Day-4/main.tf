@@ -7,7 +7,7 @@ resource "aws_vpc" "my_vpc" {
 
 resource "aws_subnet" "public_subnet_2a" {
     vpc_id = aws_vpc.my_vpc.id 
-    cidr_block = var.public_subnet_cidr
+    cidr_block = var.public_subnet_cidr_2a
     availability_zone = var.public_az_2a
     map_public_ip_on_launch = true
     tags = {
@@ -17,7 +17,7 @@ resource "aws_subnet" "public_subnet_2a" {
 
 resource "aws_subnet" "public_subnet_2b" {
     vpc_id = aws_vpc.my_vpc.id 
-    cidr_block = var.public_subnet_cidr
+    cidr_block = var.public_subnet_cidr_2b
     availability_zone = var.public_az_2b
     map_public_ip_on_launch = true
     tags = {
@@ -27,7 +27,7 @@ resource "aws_subnet" "public_subnet_2b" {
 
 resource "aws_subnet" "private_subnet_2a" {
     vpc_id = aws_vpc.my_vpc.id 
-    cidr_block = var.private_subnet_cidr
+    cidr_block = var.private_subnet_cidr_2a
     availability_zone = var.private_az_2a
     tags = {
         Name = "private_subnet"
@@ -36,7 +36,7 @@ resource "aws_subnet" "private_subnet_2a" {
 
 resource "aws_subnet" "private_subnet_2b" {
     vpc_id = aws_vpc.my_vpc.id 
-    cidr_block = var.private_subnet_cidr
+    cidr_block = var.private_subnet_cidr_2b
     availability_zone = var.private_az_2b
     tags = {
         Name = "private_subnet"
@@ -58,7 +58,7 @@ resource "aws_eip" "nat_eip" {
 }
 
 resource "aws_nat_gateway" "nat_gateway" {
-    subnet_id = aws_subnet.public_subnet.id 
+    subnet_id = aws_subnet.public_subnet_2a.id 
     allocation_id = aws_eip.nat_eip.id 
     tags = {
         Name = "nat_gateway"
