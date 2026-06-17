@@ -113,29 +113,6 @@ resource "aws_security_group" "sg" {
     }
 }
 
-resource "aws_instance" "public_instance" {
-    ami = var.ami 
-    instance_type = var.instance_type 
-    key_name = var.key_name 
-    vpc_security_group_ids = [aws_security_group.sg.id]
-    subnet_id = aws_subnet.public_subnet.id 
-    user_data = file("/root/terraform-b30/day-3/user_data.sh")
-    associate_public_ip_address = true
-    tags = {
-        Name = "public_instance"
-    }
-}
 
-resource "aws_instance" "private_instance" {
-    ami = var.ami 
-    instance_type = var.instance_type
-    key_name = var.key_name
-    vpc_security_group_ids = [aws_security_group.sg.id]
-    subnet_id = aws_subnet.private_subnet.id 
-    user_data = file("/root/terraform-b30/day-3/user_data.sh")
-    tags = {
-        Name = "private_instance"
-    }
-}
 
 
