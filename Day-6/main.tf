@@ -86,7 +86,7 @@ resource "aws_instance" "public_instance" {
     ami = "ami-0741dc526e1106ae5"
     instance_type = "t3.micro"
     key_name = "web"
-    subnet_id =  [aws_subnet.public_subnet.id]
+    subnet_id =  aws_subnet.public_subnet.id
     vpc_security_group_ids = [aws_security_group.sg.id]
     depends_on = [ aws_security_group.sg ]
     tags = {
@@ -124,5 +124,3 @@ resource "aws_security_group" "sg" {
         Name = "my-security-group-for-vpc"
     }
 }
-
-
