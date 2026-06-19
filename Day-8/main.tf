@@ -1,3 +1,7 @@
+#####TERRAFORM IMPORT#######
+#resource "aws_s3_bucket" "s3" {}
+
+#####TERRAFORM LOOPS#######
 # resource "aws_instance" "instance" {
 #     for_each = tomap({
 #         server-1 = "t3.micro"
@@ -12,7 +16,14 @@
 #     }
 # }
 
-resource "aws_s3_bucket" {}
+######TERRAFORM WORKSPACE#######
 
+resource "random_id" "random_id" {
+    byte_length = 8
+}
 
+resource "aws_s3_bucket" "demo_bucket" {
+    bucket = "demo-bucket-${terraform.workspace}-${random_id.random_id.hex}"
+  
+}
 
